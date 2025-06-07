@@ -15,3 +15,10 @@ Ein moderner, responsiver Passwortgenerator mit vielen Optionen – direkt im Br
 - ✅ Sicher: `crypto.getRandomValues()` für echte Zufälligkeit
 - ✅ Mobilfreundlich
 - ✅ Copy-to-Clipboard
+
+📝 Lizenz
+MIT License – du darfst das Skript frei verwenden, anpassen und weitergeben.
+
+👨‍💻 Autor
+Erstellt von [qttx-dev] [https://github.com/qttx-dev]
+Pull Requests, Issues und ⭐ sind willkommen!
