@@ -7,45 +7,45 @@
   <style>
     body {
       font-family: "Segoe UI", sans-serif;
-      background: linear-gradient(to bottom, #e9ecef, #f8f9fa);
-      color: #333;
-      padding: 2em;
+      background: #f1f3f5;
+      margin: 0;
+      padding: 1em;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
-      min-height: 100vh;
     }
 
     .container {
       background: #fff;
-      border-radius: 12px;
-      padding: 2em;
-      max-width: 500px;
+      border-radius: 10px;
+      padding: 1em;
       width: 100%;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      max-width: 480px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      box-sizing: border-box;
     }
 
     h1 {
       text-align: center;
-      color: #2a2a2a;
+      font-size: 1.3em;
       margin-bottom: 1em;
     }
 
     .form-group {
-      margin-bottom: 1.2em;
+      margin-bottom: 0.8em;
     }
 
     label {
-      font-weight: bold;
+      font-size: 0.95em;
+      font-weight: 500;
+      margin-bottom: 0.3em;
       display: block;
-      margin-bottom: 0.4em;
     }
 
     input[type="text"],
-    input[type="number"],
-    textarea {
+    input[type="number"] {
       width: 100%;
-      padding: 0.6em;
+      padding: 0.5em;
       font-size: 1em;
       border-radius: 6px;
       border: 1px solid #ccc;
@@ -53,70 +53,65 @@
     }
 
     input[type="checkbox"] {
-      margin-right: 0.5em;
+      margin-right: 0.4em;
     }
 
     .checkboxes label {
-      display: block;
-      margin-bottom: 0.3em;
       font-weight: normal;
+      font-size: 0.9em;
+      display: flex;
+      align-items: center;
     }
 
     button {
-      background-color: #007bff;
-      color: white;
-      border: none;
-      padding: 0.8em;
-      border-radius: 6px;
-      font-size: 1em;
-      cursor: pointer;
       width: 100%;
-      margin-top: 1em;
-      transition: background-color 0.3s;
+      padding: 0.7em;
+      font-size: 1em;
+      background: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 0.5em;
     }
 
     button:hover {
-      background-color: #0056b3;
+      background: #0056b3;
     }
 
     #password-output {
-      margin-top: 1.5em;
+      margin-top: 1em;
       text-align: center;
     }
 
     #password-text {
-      display: inline-block;
-      background: #f1f3f5;
       font-family: monospace;
-      padding: 0.8em 1em;
-      font-size: 1.2em;
-      border-radius: 8px;
+      background: #f8f9fa;
+      padding: 0.5em 1em;
+      border-radius: 6px;
+      display: inline-block;
+      font-size: 1.1em;
       word-break: break-word;
       max-width: 100%;
     }
 
     .copy-btn {
-      background-color: #28a745;
-      color: white;
-      border: none;
-      padding: 0.6em;
-      font-size: 1em;
-      border-radius: 6px;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
+      background: #28a745;
+      margin-top: 0.5em;
+      display: flex;
       justify-content: center;
-      margin-top: 1em;
-      width: 100%;
-      transition: background-color 0.3s;
-    }
-
-    .copy-btn:hover {
-      background-color: #1e7e34;
+      align-items: center;
     }
 
     .copy-btn i {
-      margin-right: 0.5em;
+      margin-right: 0.4em;
+    }
+
+    @media (min-height: 700px) {
+      body {
+        justify-content: center;
+        height: 100vh;
+      }
     }
   </style>
 </head>
@@ -125,34 +120,33 @@
     <h1>🔐 Passwortgenerator</h1>
 
     <div class="form-group">
-      <label for="length">Passwortlänge:</label>
+      <label for="length">Länge:</label>
       <input type="number" id="length" value="16" min="4" max="64">
     </div>
 
     <div class="form-group checkboxes">
-      <label>Zeichenarten:</label>
       <label><input type="checkbox" id="include-lowercase" checked> Kleinbuchstaben (a-z)</label>
       <label><input type="checkbox" id="include-uppercase" checked> Großbuchstaben (A-Z)</label>
       <label><input type="checkbox" id="include-numbers" checked> Zahlen (0-9)</label>
-      <label><input type="checkbox" id="include-symbols" checked> Sonderzeichen (!@#...)</label>
+      <label><input type="checkbox" id="include-symbols" checked> Sonderzeichen (!@#$%&*()_-+=?/)</label>
     </div>
 
     <div class="form-group">
-      <label for="custom-include">Zusätzliche eigene Zeichen (optional):</label>
-      <input type="text" id="custom-include" placeholder="z. B. äöüß€">
+      <label for="custom-include">Eigene Zeichen (optional):</label>
+      <input type="text" id="custom-include" placeholder="z. B. äöüß">
     </div>
 
     <div class="form-group">
-      <label for="exclude">Zeichen ausschließen (optional):</label>
+      <label for="exclude">Zeichen ausschließen:</label>
       <input type="text" id="exclude" placeholder="z. B. 0oO1Il">
     </div>
 
-    <button onclick="generatePassword()">🎲 Passwort generieren</button>
+    <button onclick="generatePassword()">🎲 Generieren</button>
 
     <div id="password-output" style="display:none;">
       <div id="password-text"></div>
       <button class="copy-btn" onclick="copyPassword()">
-        <i>📝</i> Passwort kopieren
+        <i>📝</i> Kopieren
       </button>
     </div>
   </div>
@@ -171,10 +165,9 @@
       if (includeLower) charset += "abcdefghijklmnopqrstuvwxyz";
       if (includeUpper) charset += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
       if (includeNumbers) charset += "0123456789";
-      if (includeSymbols) charset += "!@#$%^&*()_-+=[]{}<>?/|~";
+      if (includeSymbols) charset += "!@#$%&*()_-+=?/";
       charset += customInclude;
 
-      // Entferne ausgeschlossene Zeichen
       if (excludeChars) {
         charset = charset.split('').filter(c => !excludeChars.includes(c)).join('');
       }
@@ -198,9 +191,10 @@
 
     function copyPassword() {
       const password = document.getElementById('password-text').textContent;
-      navigator.clipboard.writeText(password).then(() => {
-        alert("✅ Passwort wurde in die Zwischenablage kopiert!");
-      });
+      // Auskommentieren, falls eine Benachrichtigung gewünscht ist, wenn das Passwort in der Zwischenablage ist
+      navigator.clipboard.writeText(password)//.then(() => {
+      //   alert("✅ Passwort kopiert!");
+      // });
     }
   </script>
 </body>
