@@ -107,6 +107,15 @@
       margin-right: 0.4em;
     }
 
+    .copy-feedback {
+      text-align: center;
+      font-weight: 500;
+      color: #28a745;
+      font-size: 0.9em;
+      margin-top: 0.5em;
+      transition: opacity 0.5s ease;
+    }
+
     @media (min-height: 700px) {
       body {
         justify-content: center;
@@ -191,10 +200,20 @@
 
     function copyPassword() {
       const password = document.getElementById('password-text').textContent;
-      // Auskommentieren, falls eine Benachrichtigung gewünscht ist, wenn das Passwort in der Zwischenablage ist
-      navigator.clipboard.writeText(password)//.then(() => {
-      //   alert("✅ Passwort kopiert!");
-      // });
+      navigator.clipboard.writeText(password).then(() => {
+        const existing = document.querySelector(".copy-feedback");
+        if (existing) existing.remove();
+
+        const message = document.createElement("div");
+        message.textContent = "✅ Kopiert!";
+        message.className = "copy-feedback";
+
+        const output = document.getElementById("password-output");
+        output.appendChild(message);
+
+        setTimeout(() => message.style.opacity = "0", 1500);
+        setTimeout(() => message.remove(), 2000);
+      });
     }
   </script>
 </body>
